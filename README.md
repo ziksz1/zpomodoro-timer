@@ -1,4 +1,4 @@
-# 🍅 Live Minimalist Pomodoro Timer
+<h1 align="center">zPomodoro Timer</h1>
 
 Aplikasi Web Pomodoro Timer yang dirancang dengan estetika minimalis modern, profesional, dan interaktif. Dilengkapi dengan motif latar belakang *Black Grid*, optimasi tipografi jam digital, manajemen menu pengaturan, serta integrasi multi-bahasa.
 
