@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>zPomodoro Timer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-zinc-950 text-zinc-300 min-h-screen flex items-center justify-center font-sans selection:bg-zinc-800">
+
+    <div class="relative bg-zinc-950/80 backdrop-blur-sm border border-zinc-800/80 p-10 rounded-2xl w-full max-w-md transition-all duration-500 hover:border-zinc-700 shadow-2xl shadow-black/50">
+        
+        <div class="absolute top-4 right-4">
+            <button id="settings-btn" class="p-2 rounded-lg bg-zinc-900 border border-zinc-800 text-zinc-400 hover:bg-zinc-800 hover:text-zinc-100 transition-all duration-300 active:scale-95">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                </svg>
+            </button>
+        </div>
+
+        <h1 data-i18n="title" class="text-xl font-medium text-zinc-400 text-center mb-8 tracking-wide uppercase text-xs">zPomodoro Timer</h1>
+        
+        <div class="flex justify-center gap-3 mb-8">
+            <button id="preset-25" class="preset-btn active-preset px-5 py-2 rounded-full text-sm font-medium border border-zinc-800 bg-zinc-900 text-zinc-400 transition-all duration-300 hover:text-zinc-100 active:scale-95">25m</button>
+            <button id="preset-5" class="preset-btn px-5 py-2 rounded-full text-sm font-medium border border-zinc-800 bg-zinc-900 text-zinc-400 transition-all duration-300 hover:text-zinc-100 active:scale-95">5m</button>
+            <button id="preset-15" class="preset-btn px-5 py-2 rounded-full text-sm font-medium border border-zinc-800 bg-zinc-900 text-zinc-400 transition-all duration-300 hover:text-zinc-100 active:scale-95">15m</button>
+        </div>
+
+        <div id="timer-display" class="text-7xl font-bold text-center text-zinc-100 mb-10 tracking-widest transition-all duration-500">25:00</div>
+
+        <div class="flex justify-center gap-4 mb-8">
+            <button id="start-btn" data-i18n="start" class="w-32 py-2.5 rounded-xl bg-zinc-100 text-zinc-950 font-semibold hover:bg-white transition-all duration-300 active:scale-95 shadow-md">Mulai</button>
+            <button id="pause-btn" data-i18n="pause" class="hidden w-32 py-2.5 rounded-xl bg-zinc-900 text-zinc-100 font-medium border border-zinc-800 hover:bg-zinc-800 transition-all duration-300 active:scale-95">Jeda</button>
+            <button id="reset-btn" data-i18n="reset" class="w-32 py-2.5 rounded-xl border border-zinc-800 bg-transparent text-zinc-400 font-medium hover:bg-zinc-900 hover:text-zinc-100 transition-all duration-300 active:scale-95">Ulangi</button>
+        </div>
+
+        <div class="flex items-center justify-center gap-3 pt-6 border-t border-zinc-900">
+            <label for="custom-input" data-i18n="customLabel" class="text-xs text-zinc-500 tracking-wider uppercase">Custom</label>
+            <input type="number" id="custom-input" placeholder="Min" class="w-20 bg-zinc-900 border border-zinc-800/80 rounded-lg px-3 py-1.5 text-sm text-zinc-100 focus:outline-none focus:border-zinc-600 text-center transition-colors duration-300">
+            <button id="apply-custom-btn" data-i18n="setBtn" class="px-4 py-1.5 text-xs rounded-lg bg-zinc-900 border border-zinc-800 text-zinc-400 hover:bg-zinc-800 hover:text-zinc-100 transition-all duration-300 active:scale-95">Setel</button>
+        </div>
+    </div>
+
+    <div id="settings-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-300">
+        <div class="bg-zinc-950 border border-zinc-800/80 p-6 rounded-2xl w-80 shadow-2xl transform scale-95 transition-transform duration-300" id="settings-content">
+            
+            <div class="flex justify-between items-center mb-6 border-b border-zinc-900 pb-3">
+                <h2 data-i18n="settingsTitle" class="text-lg font-bold text-zinc-100">Pengaturan</h2>
+                <button id="close-settings-btn" class="text-zinc-500 hover:text-red-500 transition-colors text-2xl font-light">&times;</button>
+            </div>
+            
+            <div class="flex justify-between items-center mb-4">
+                <label data-i18n="languageLabel" class="text-sm text-zinc-400 font-medium">Bahasa</label>
+                <select id="lang-select" class="bg-zinc-900 border border-zinc-700 text-zinc-300 text-sm rounded-lg px-3 py-1.5 focus:outline-none focus:border-zinc-500 cursor-pointer">
+                    <option value="id">Indonesia</option>
+                    <option value="en">English</option>
+                </select>
+            </div>
+
+        </div>
+    </div>
+
+    <audio id="alarm-sound" src="assets/digital-alarm.mp3"></audio>
+    <script src="script.js"></script>
+</body>
+</html>
