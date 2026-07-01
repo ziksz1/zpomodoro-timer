@@ -20,3 +20,5 @@ Aplikasi Web Pomodoro Timer yang dirancang dengan estetika minimalis modern, pro
 ├── script.js           # Logika Hitung Mundur, Manajemen State UI, & Sistem Penerjemah (i18n)
 └── assets/
     └── alarm.mp3       # Berkas audio efek suara ketika waktu fokus berakhir
+```
+---
